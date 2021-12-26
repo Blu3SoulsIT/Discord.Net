@@ -263,6 +263,9 @@ namespace Discord.Interactions.Builders
         {
             var moduleInfo = new ModuleInfo(this, interactionService, services, parent);
 
+            if (TypeInfo is null || !ModuleClassBuilder.IsValidModuleDefinition(TypeInfo))
+                return moduleInfo;
+
             IInteractionModuleBase instance = ReflectionUtils<IInteractionModuleBase>.CreateObject(TypeInfo, interactionService, services);
             try
             {
